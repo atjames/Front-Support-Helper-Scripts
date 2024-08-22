@@ -4,7 +4,7 @@ This is a repository full of different Python scripts that I've used at one poin
 
 It should be noted all of these files are written in Python. Steps on getting Python up and running on your machine can be found below.
 
-I've done my best to title the directories according to their function/contents, but feel free to ping me with any direct questions. 
+
 
 
 
@@ -24,3 +24,5 @@ With that said, depending on the files you want to run, the necessary packages m
 ```
 
 I use [VS Code](https://code.visualstudio.com/) to write and run the scripts. 
+
+I've done my best to title the directories according to their function/contents, but feel free to ping me with any direct questions. 
