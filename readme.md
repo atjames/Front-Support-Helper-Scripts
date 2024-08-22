@@ -2,13 +2,17 @@
 
 This is a repository full of different Python scripts that I've used at one point or another on the job at Front. I wanted to make these public for other T1.5/T2 peeps. These scripts vary and cover everything from working with Front's Core API, to manipulating CSV exports. Some of are very niche, while others I use daily. 
 
-It should be noted all of these files are written in Python. Steps on getting Python up and running on your machine can be found below.
+It should be noted all of these files are written in Python. Each directory contains a ReadMe with more information on what each Python file does.
+
+Steps on getting Python up and running on your machine can be found below.
 
 
 
 
 
 ## How do I run these?
+
+
 
 For documentation on how to get a Python env up and running on your machine check out: https://docs.python.org/3/library/venv.html.
 
