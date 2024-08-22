@@ -1,0 +1,3 @@
+# Print one column as comma separated list
+
+Allows you to take a column from a CSV and print as a comma separated list. Very useful when needing to update resources in bulk. For example, export the Channel table in HQ. You get a CSV file but our plug-ins only accept Channel IDs that are comma separated. This would allow you take that CSV file and pull the ID field and convert to a Comma separated list :D 
