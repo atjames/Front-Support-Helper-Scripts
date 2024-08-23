@@ -1,4 +1,4 @@
-# Compare Teammate IDs
+# Compare Teammate Login Emails
 
 Script to compare Teammate table from HQ to a customer provided CSV. Really useful when we have to change a bunch of login emails due to domain changes or SSO login issues.
 
