@@ -14,7 +14,7 @@ Steps on getting Python up and running on your machine can be found below.
 
 
 
-For documentation on how to get a Python env up and running on your machine check out: https://docs.python.org/3/library/venv.html.
+For documentation on how to get a Python env up and running on your machine check out: https://code.visualstudio.com/docs/python/python-tutorial
 
 I would advise watching a YouTube video and doing some Google searches on the subject, before building your first env just so you know what's going on. It's pretty straight forward though. 
 
@@ -27,6 +27,6 @@ With that said, depending on the files you want to run, the necessary packages m
   pip install tabulate
 ```
 
-I use [VS Code](https://code.visualstudio.com/) to write and run the scripts. 
+I use [VS Code](https://code.visualstudio.com/) to write and run Python code. 
 
 I've done my best to title the directories according to their function/contents, but feel free to ping me with any direct questions. 
