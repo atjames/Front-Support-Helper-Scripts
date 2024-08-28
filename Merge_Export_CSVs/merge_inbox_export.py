@@ -12,14 +12,14 @@ Inboxes -> Inbox folder -> Conversation folders -> Messages.csv
 
 '''
 
-# Path to the Parent folder
+# Path to the Inboxes folder
 parent_folder_path = r'file\path\here'
 
 # Dictionary to store rows for each inbox folder
 inbox_rows = {}
 
-# Increase the maximum field size limit
-csv.field_size_limit(10**6)  # Set to a larger size if necessary
+
+csv.field_size_limit(10**6)  #  Increases the maximum allowable field size for CSV parsing. By default, the csv library in Python imposes a limit on the size of individual fields (cells) in a CSV file. Need to increase this based on size of fields in the Text column of the messages.csv
 
 try:
     # Get list of inbox folders
