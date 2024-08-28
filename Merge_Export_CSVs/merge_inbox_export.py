@@ -2,9 +2,10 @@ import os
 import csv
 
 '''
+
 This is for a multiple inbox export. 
 
-Please note if the export is quite large you might need to break CSVs into chunks. I would advise breaking it up by inbox. This is because applications like Excel have a row limit on CSVs that is just over 1 million. 
+Please note if the exports are quite large you should consider chuncking output CSVs.This is because applications like Excel have a row limit on CSVs that is just over 1 million. 
 
 Expected file structure is: 
 Inboxes -> Inbox folder -> Conversation folder -> Messages.csv
