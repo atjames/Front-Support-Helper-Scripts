@@ -2,12 +2,12 @@ import os
 import csv
 
 '''
-This is for a multiple inbox export. It's a bit more code than the other Merge function. 
+This is for a multiple inbox export. 
 
-Please note if the export is quite large you might need to break CSVs into chunks per inbox. Applications like Excel have a row limit on CSVs just over 1 million. 
+Please note if the export is quite large you might need to break CSVs into chunks. I would advise breaking it up by inbox. This is because applications like Excel have a row limit on CSVs that is just over 1 million. 
 
 Expected file structure is: 
-Inboxes -> Inbox folder -> Conversation folders -> Messages.csv
+Inboxes -> Inbox folder -> Conversation folder -> Messages.csv
 
 '''
 
@@ -17,7 +17,7 @@ parent_folder_path = r'file\path\here'
 # Dictionary to store rows for each inbox folder
 inbox_rows = {}
 
-csv.field_size_limit(10**6)  # Increases the maximum allowable field size for CSV parsing. By default, the csv library in Python imposes a limit on the size of individual fields (cells) in a CSV file. Need to increase this based on size of fields in the Text column of the messages.csv
+csv.field_size_limit(10**6)  # Increases the maximum allowable field size for CSV parsing. By default, the csv library in Python imposes a limit on the size of individual fields (cells) in a CSV file. Need to increase this due to the size of fields in the Text column of the messages.csv
 
 try:
     # Get list of inbox folders
