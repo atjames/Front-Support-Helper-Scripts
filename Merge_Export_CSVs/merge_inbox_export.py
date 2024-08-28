@@ -1,6 +1,5 @@
 import os
 import csv
-from tqdm import tqdm
 
 '''
 This is for a multiple inbox export. It's a bit more code than the other Merge function. 
@@ -18,28 +17,29 @@ parent_folder_path = r'file\path\here'
 # Dictionary to store rows for each inbox folder
 inbox_rows = {}
 
-
-csv.field_size_limit(10**6)  #  Increases the maximum allowable field size for CSV parsing. By default, the csv library in Python imposes a limit on the size of individual fields (cells) in a CSV file. Need to increase this based on size of fields in the Text column of the messages.csv
+csv.field_size_limit(10**6)  # Increases the maximum allowable field size for CSV parsing. By default, the csv library in Python imposes a limit on the size of individual fields (cells) in a CSV file. Need to increase this based on size of fields in the Text column of the messages.csv
 
 try:
     # Get list of inbox folders
     inbox_folders = os.listdir(parent_folder_path)
     total_inboxes = len(inbox_folders)
-    
-    # Iterate through each inbox folder with progress bar
-    for inbox_folder in tqdm(inbox_folders, desc='Inbox Folders', unit='folder'):
+    print(f"Processing {total_inboxes} inbox folders...")
+
+    # Iterate through each inbox folder
+    for inbox_folder in inbox_folders:
         inbox_folder_path = os.path.join(parent_folder_path, inbox_folder)
-        
+
         if os.path.isdir(inbox_folder_path):
             # Initialize rows for the current inbox folder
             inbox_rows[inbox_folder] = []
-            
+
             # Get list of conversation folders
             conversation_folders = os.listdir(inbox_folder_path)
             total_conversations = len(conversation_folders)
+            print(f"Processing {total_conversations} conversation folders in {inbox_folder}...")
 
-            # Iterate through each conversation folder with progress bar
-            for conversation_folder in tqdm(conversation_folders, desc=f'Processing Conversations in {inbox_folder}', unit='folder', leave=False):
+            # Iterate through each conversation folder
+            for conversation_folder in conversation_folders:
                 conversation_folder_path = os.path.join(inbox_folder_path, conversation_folder)
 
                 if os.path.isdir(conversation_folder_path):
@@ -62,7 +62,7 @@ try:
                                     inbox_rows[inbox_folder].append(row)
 
                         except Exception as e:
-                            tqdm.write(f"Error reading file {messages_csv_path}: {e}")
+                            print(f"Error reading file {messages_csv_path}: {e}")
 
             # Write rows for the current inbox folder to a CSV file
             if inbox_rows[inbox_folder]:
@@ -73,10 +73,10 @@ try:
                         writer.writerow(headers)
                         writer.writerows(inbox_rows[inbox_folder])
 
-                    tqdm.write(f"Written CSV for inbox folder {inbox_folder} to {output_csv}")
+                    print(f"Written CSV for inbox folder {inbox_folder} to {output_csv}")
 
                 except Exception as e:
-                    tqdm.write(f"Error writing to file {output_csv}: {e}")
+                    print(f"Error writing to file {output_csv}: {e}")
 
 except Exception as e:
-    tqdm.write(f"Error processing files: {e}")
+    print(f"Error processing files: {e}")
