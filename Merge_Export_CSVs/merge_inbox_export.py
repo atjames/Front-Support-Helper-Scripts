@@ -2,14 +2,13 @@ import os
 import csv
 
 '''
+This is for a multiple inbox export.
 
-This is for a multiple inbox export. 
+Please note if the exports are quite large you should consider chunking output CSVs. 
+This is because applications like Excel have a row limit on CSVs that is just over 1 million.
 
-Please note if the exports are quite large you should consider chuncking output CSVs.This is because applications like Excel have a row limit on CSVs that is just over 1 million. 
-
-Expected file structure is: 
+Expected file structure is:
 Inboxes -> Inbox folder -> Conversation folder -> Messages.csv
-
 '''
 
 # Path to the Inboxes folder
@@ -18,7 +17,7 @@ parent_folder_path = r'file\path\here'
 # Dictionary to store rows for each inbox folder
 inbox_rows = {}
 
-csv.field_size_limit(10**6)  # Increases the maximum allowable field size for CSV parsing. By default, the csv library in Python imposes a limit on the size of individual fields (cells) in a CSV file. Need to increase this due to the size of fields in the Text column of the messages.csv
+csv.field_size_limit(10**6)  # Increases the maximum allowable field size for CSV parsing due to the size of fields in the Text column of messages.csv
 
 try:
     # Get list of inbox folders
@@ -68,10 +67,19 @@ try:
             # Write rows for the current inbox folder to a CSV file
             if inbox_rows[inbox_folder]:
                 output_csv = f'{inbox_folder}.csv'
+                
+                file_exists = os.path.exists(output_csv)
+                
+                if file_exists:
+                    print(f"Output file {output_csv} already exists. Appending to the existing file.")
+
                 try:
-                    with open(output_csv, mode='w', newline='', encoding='utf-8') as outfile:
+                    with open(output_csv, mode='a' if file_exists else 'w', newline='', encoding='utf-8') as outfile:
                         writer = csv.writer(outfile)
-                        writer.writerow(headers)
+                        
+                        if not file_exists:
+                            writer.writerow(headers)  # Write headers only if the file doesn't exist
+                        
                         writer.writerows(inbox_rows[inbox_folder])
 
                     print(f"Written CSV for inbox folder {inbox_folder} to {output_csv}")
