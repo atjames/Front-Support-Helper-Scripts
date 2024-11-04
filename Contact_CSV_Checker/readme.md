@@ -1,7 +1,9 @@
 # Check CSV Upload for correct formatting
 
-This script can be ran to check if a contacts csv file for upload has phone and email in the correct format. Can probably be extended to the custom fields as well later.
+This script can be ran to check if a provided contacts csv has phone/email in the correct format. 
 
-Will output a CSV that lists what rows are incorrect and what column is incorrect for that row. 
+Will output a txt file that gives information on what fields are incorrect and which row they are contained. 
 
 Note: The script currently only considers US phone numbers so the regex being matched on will need to be updated if you need to check for additional country code and number formats.
+
+Will look into adjusting for custom fields if needed. 
