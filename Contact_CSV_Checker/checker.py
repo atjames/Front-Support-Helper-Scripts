@@ -1,35 +1,54 @@
 import csv
 import re
 
-#Define regex
-email_regex = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"  # Email format: alphanumeric characters, '.', '_', '%', '+', '-', '@', domain, and 2+ char top-level domain
-us_phone_regex_with_code = r"^1\d{10}$"  # U.S. format with country code: 1XXXXXXXXXX - WILL NEED TO ADJUST FOR NUMBERS OUTSIDE THE US
-us_phone_regex_without_code = r"^\d{10}$"  # U.S. format without country code: XXXXXXXXXX - WILL NEED TO ADJUST FOR NUMBERS OUTSIDE THE US
+# Define regex
+email_regex = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+us_phone_regex_with_code = r"^1\d{10}$"
+us_phone_regex_without_code = r"^\d{10}$"
 
 def validate_email(email):
     return re.match(email_regex, email) is not None
 
 def validate_phone(phone):
-    # Accept formats: 1XXXXXXXXXX, XXXXXXXXXX, or blank
     if phone == "":
-        return True  # Allow blank phone numbers
+        return True
     return re.match(us_phone_regex_with_code, phone) is not None or re.match(us_phone_regex_without_code, phone) is not None
 
-def check_contact_file(input_file, output_file):
+def load_account_names(account_file):
+    account_names = set()
+    with open(account_file, mode='r') as accounts_file:
+        accounts_reader = csv.DictReader(accounts_file)
+        for row in accounts_reader:
+            account_names.add(row['name'])
+    return account_names
+
+def check_contact_file(input_file, output_file, account_file):
+    account_names = load_account_names(account_file)
     with open(input_file, mode='r') as csv_file:
         csv_reader = csv.DictReader(csv_file)
         invalid_entries = []
 
-        for row_index, row in enumerate(csv_reader, start=2):  # Start from 1 to reflect actual CSV indexing
+        for row_index, row in enumerate(csv_reader, start=2):
             email = row['email']
             phone = row['phone']
+            account_name = row['accountName']
             issues = []
 
-            if not email or not validate_email(email):
-                issues.append("Invalid or missing email")
+            # Check if both email and phone are blank
+            if not email and not phone:
+                issues.append("Both email and phone are missing")
 
-            if not validate_phone(phone):
+            # Validate email if present
+            elif email and not validate_email(email):
+                issues.append("Invalid email format")
+
+            # Validate phone if present
+            elif phone and not validate_phone(phone):
                 issues.append("Invalid phone format")
+
+            # Check if account name exists in accounts.csv
+            if account_name not in account_names:
+                issues.append("Account does not match any currently existing accounts")
 
             if issues:
                 invalid_entries.append({
@@ -45,6 +64,7 @@ def check_contact_file(input_file, output_file):
 
     print(f"Validation completed. See {output_file} for results.")
 
-input_file = r'customer_provided_csv_here.csv'
+input_file = r'CUSTOMER_PROVIDED_CSV'
 output_file = r'invalid_contacts.txt'
-check_contact_file(input_file, output_file)
+account_file = r'ACCOUNT_EXPORT_FILE.CSV'
+check_contact_file(input_file, output_file, account_file)
