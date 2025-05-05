@@ -1,6 +1,6 @@
-# List of private IDs
+# List of public IDs
 ids = [
-    '',
+    'cnv_12345689'
 ]
 
 # Remove prefix and convert to private ID
