@@ -22,9 +22,9 @@ SUCCESS_CODES = {200, 201, 202, 204}
 
 # Run Configuration
 NUM_RUNS = 1                    # How many times the request will repeat
-MAX_RETRIES = 3                 # How many retry attempts per run
+MAX_RETRIES = 3                 # How many retry attempts per request
 DELAY_BETWEEN_RETRIES = 2       # Seconds to wait between retry attempts
-DELAY_BETWEEN_RUNS = 2          # Seconds to wait between different runs
+DELAY_BETWEEN_RUNS = 2          # Seconds to wait between request runs
 
 # File Configuration
 LOG_FILENAME = "api_responses.txt"
